@@ -1,8 +1,12 @@
 <?php
+
+use Alura\Cursos\Entity\Curso;
+use Alura\Cursos\Infra\EntityManagerCreator;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-$entityManager = (new \Alura\Cursos\Infra\EntityManagerCreator())->getEntityManager();
-$repositorioDeCursos = $entityManager->getRepository(\Alura\Cursos\Entity\Curso::class);
+$entityManager = (new EntityManagerCreator())->getEntityManager();
+$repositorioDeCursos = $entityManager->getRepository(Curso::class);
 $cursos = $repositorioDeCursos->findAll();
 ?>
 <!DOCTYPE html>
@@ -17,6 +21,7 @@ $cursos = $repositorioDeCursos->findAll();
     <div class="jumbotron">
         <h1>Listar cursos</h1>
     </div>
+    <a href="novo-curso.php" class="btn btn-primary mb-2">Cadastrar Curso</a>
     <ul class="list-group">
         <?php foreach ($cursos as $curso): ?>
             <li class="list-group-item">
